@@ -4,9 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleIValueConverter"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
+        xmlns:classes="clr-namespace:SimpleIValueConverter.Classes"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Window.Resources>
+        <classes:Person x:Key="person"/>
+        <classes:BackgroundConverter x:Key="converter" />
+    </Window.Resources>
+    
+    <Grid DataContext="{Binding Source={StaticResource person}}" Background="{Binding Gender, Converter={StaticResource converter}}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock>Nome:</TextBlock>
+            <TextBox Text="{Binding Name, Mode=TwoWay}" Width="250" />
+            <TextBlock>Idade:</TextBlock>
+            <TextBox Text="{Binding Age, Mode=TwoWay}" Width="250" />
+            <TextBlock>Genero:</TextBlock>
+            <ComboBox SelectedValue="{Binding Gender, Mode=TwoWay}">
+                <sys:String>Male</sys:String>
+                <sys:String>Female</sys:String>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Window>
